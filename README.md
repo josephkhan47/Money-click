@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earnings App</title>
-    <script src="https://www.paypal.com/sdk/js?ARg7kZRpcfGcNdz8peLfy_-iGP5VISNghrjy0XnYs08fnztE93TbOIFfnnhNvpDUFZ81dgOwmST-BkID></script> <!-- Replace YOUR_CLIENT_ID_HERE -->
-    <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to a CSS file for styling -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ActBvohs5C_m5NEthZcxKdza1UpVpH3FNNyq6xb1976nS7EMTZRsae-2hsONhVoPgTuROB4lDTUh00j4"></script> <!-- Replace with your actual Client ID -->
     <style>
         body {
             font-family: Arial, sans-serif;
