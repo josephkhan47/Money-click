@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Earnings App</title>
-    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID_HERE"></script> <!-- Replace YOUR_CLIENT_ID_HERE -->
+    <script src="https://www.paypal.com/sdk/js?client-ARg7kZRpcfGcNdz8peLfy_-iGP5VISNghrjy0XnYs08fnztE93TbOIFfnnhNvpDUFZ81dgOwmST-BkID
     <link rel="stylesheet" href="styles.css"> <!-- Optional: Link to a CSS file for styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
     <h1>Earnings App</h1>
@@ -18,6 +30,48 @@
 
     <div id="paypal-button-container" style="display: none;"></div>
 
-    <script src="index.js"></script> <!-- Link to your JavaScript file -->
+    <script>
+        let earnings = 0;
+
+        // Update earnings display
+        function updateEarnings() {
+            document.getElementById('earnings').innerText = (earnings / 100).toFixed(2);
+        }
+
+        // Handle earning button click
+        document.getElementById('earn-button').addEventListener('click', function() {
+            earnings += 50; // Add 50 pence
+            updateEarnings();
+        });
+
+        // Handle cash out button click
+        document.getElementById('cashout-button').addEventListener('click', function() {
+            document.getElementById('paypal-button-container').style.display = 'block';
+            // Add PayPal button rendering code here
+        });
+
+        // Render PayPal button
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: (earnings / 100).toFixed(2) // Convert to pounds
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given);
+                    // Handle successful transaction here (reset earnings, etc.)
+                    earnings = 0; // Reset earnings after cashout
+                    updateEarnings();
+                    document.getElementById('paypal-button-container').style.display = 'none'; // Hide the button after cashout
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
 </body>
 </html>
+    
